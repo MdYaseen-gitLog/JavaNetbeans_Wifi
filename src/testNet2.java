@@ -1,8 +1,7 @@
 
-import com.sun.awt.AWTUtilities;
+import com.sun.awt.*;
 import java.awt.AWTException;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.MenuItem;
@@ -12,6 +11,7 @@ import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -32,8 +31,9 @@ import javax.swing.Timer;
  * @author pc
  */
 public class testNet2 extends javax.swing.JFrame {
-static  Timer timer;
-static Setting st=new Setting();
+
+    static Timer timer;
+    static Setting st = new Setting();
     static WanTest openProperties = new WanTest();
     static testNet2 openDashboard = new testNet2();
     static boolean frameVisible;
@@ -45,17 +45,20 @@ static Setting st=new Setting();
     static MenuItem ShowUtility = new MenuItem("Show Utility");
     static MenuItem exitItem = new MenuItem("Exit");
     static MenuItem setting = new MenuItem("Open Setting");
- static TrayIcon trayIcon;
- static int clkCount=0;
+    static TrayIcon trayIcon;
+    static int clkCount = 0;
+
     public testNet2() {
         initComponents();
+        // Scan();
         GuiLook();
         this.setSize(170, 83);
         frameVisible = true;
+
         //Scan();
         btnScan.setToolTipText("Scan for Networks");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
+        AWTUtilities.setWindowShape(this, new RoundRectangle2D.Float(0, 0, 170, 83, 10, 10));
 //height of the task bar
         Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
         int taskBarSize = scnMax.bottom;
@@ -63,23 +66,24 @@ static Setting st=new Setting();
         setLocation(screenSize.width - getWidth(), screenSize.height - taskBarSize - getHeight());
         NetworkList();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icon.jpg")));
-   //Transparent Form
-     AWTUtilities.setWindowOpacity(this, 0.9f);
+        //Transparent Form
+        AWTUtilities.setWindowOpacity(this, 0.9f);
+
     }
 
-    void Scan(){
+    static void Scan() {
         try {
-               if (netIsAvailable()) {
-        trayIcon.setToolTip("Connected to internet.");
-    } else {
-           trayIcon.setToolTip("Searching Networks.....");
-    }
+            if (netIsAvailable()) {
+                trayIcon.setToolTip("Connected to internet.");
+            } else {
+                trayIcon.setToolTip("Searching Networks.....");
+            }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-  
-    
+
     }
+
     public void getConnect() {
         String networkList = listNetwork.getSelectedItem().toString();
         String cmd = "netsh wlan connect name=" + networkList + "";
@@ -88,7 +92,7 @@ static Setting st=new Setting();
 
             Process p3;
             p3 = Runtime.getRuntime().exec("cmd /c " + cmd);
-            
+
             try {
                 p3.waitFor();
             } catch (InterruptedException ex) {
@@ -179,7 +183,7 @@ static Setting st=new Setting();
 
     }
 
-     public static void SignalStatus() {
+    public static void SignalStatus() {
         String cmd = "for /f \"tokens=2*delims=: \" %i in ('netsh wlan show networks^|find \"Signal\"')do @echo\\%j";
 
         try {
@@ -192,9 +196,9 @@ static Setting st=new Setting();
             while (line != null) {
 
                 // wlanResults.append(line + ".");
-               // listNetwork.addItem(line);
-                  line = reader.readLine();
-                   System.out.println("SignalStatus"+line);
+                // listNetwork.addItem(line);
+                line = reader.readLine();
+                System.out.println("SignalStatus" + line);
             }
         } catch (IOException ex) {
 
@@ -206,6 +210,7 @@ static Setting st=new Setting();
         }
 
     }
+
     void GuiLook() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -246,10 +251,9 @@ static Setting st=new Setting();
 
     }
 
-    
     public static void getPassword() {
-       
-        String cmd = "netsh wlan show profile name="+listNetwork+" key=clear | findstr Key";
+
+        String cmd = "netsh wlan show profile name=" + listNetwork + " key=clear | findstr Key";
 
         try {
 
@@ -265,7 +269,7 @@ static Setting st=new Setting();
             }
         } catch (IOException ex) {
 
-           // openProperties.wlanResults.append("Comand error\n" + ex);
+            // openProperties.wlanResults.append("Comand error\n" + ex);
             System.out.println("There was an IO exception.");
 
         } catch (InterruptedException ex) {
@@ -273,7 +277,7 @@ static Setting st=new Setting();
         }
 
     }
-    
+
     private void GetCurrentDateTimeActionPerformed(java.awt.event.ActionEvent evt) {
         DateFormat dateandtime = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
@@ -290,7 +294,6 @@ static Setting st=new Setting();
         }
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -351,7 +354,7 @@ static Setting st=new Setting();
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(btnScan, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(27, 27, 27)
                         .addComponent(btnConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDisconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -366,7 +369,7 @@ static Setting st=new Setting();
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnDisconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConnect, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnScan, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(13, 13, 13))
         );
@@ -390,7 +393,7 @@ static Setting st=new Setting();
     private void btnDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisconnectActionPerformed
         if (netIsAvailable()) {
             toDisconnect();
-       trayIcon.setToolTip("Not Connected to internet.");
+            trayIcon.setToolTip("Not Connected to internet.");
             System.err.println("Disconnected");
         }
     }//GEN-LAST:event_btnDisconnectActionPerformed
@@ -405,8 +408,7 @@ static Setting st=new Setting();
 //        BufferedImage im = new BufferedImage(50, 50, BufferedImage.TYPE_3BYTE_BGR);
         BufferedImage im = new BufferedImage(50, 50, BufferedImage.TYPE_USHORT_555_RGB);
         trayIcon = new TrayIcon(im, "Searching networks...");
-     
-        
+
         try {
 
             //Add components to pop-up menu
@@ -421,7 +423,7 @@ static Setting st=new Setting();
             popup.add(exitItem);
             ShowUtility.setEnabled(false);
             Hideproperties.setEnabled(false);
-            
+
         } catch (HeadlessException e) {
             System.out.println(e.getMessage());
         }
@@ -481,21 +483,21 @@ static Setting st=new Setting();
             HideUtility.setEnabled(true);
         });
         //***********End of Show menu Click
-         //***********Hide menu click
+        //***********Hide menu click
         // addActionListener
         setting.addActionListener((ActionEvent e) -> {
             System.out.println("Clicked on setting.");
             clkCount++;
-            if (clkCount==1) {
-               st.setVisible(true);
-               setting.setLabel("Close Setting");
-            } else if(clkCount==2) {
+            if (clkCount == 1) {
+                st.setVisible(true);
+                setting.setLabel("Close Setting");
+            } else if (clkCount == 2) {
                 st.setVisible(false);
-               setting.setLabel("Open Setting");
-               clkCount=0;
+                setting.setLabel("Open Setting");
+                clkCount = 0;
             }
             st.setVisible(true);
-           // frameVisible = false;
+            // frameVisible = false;
             openProperties.setLocationOfProperties();
             ShowUtility.setEnabled(true);
             HideUtility.setEnabled(false);
@@ -547,42 +549,40 @@ static Setting st=new Setting();
 
             //**********************************
         });
-        
-        //Refresh Internet Connectivity  Check              
-                 ActionListener actListner = new ActionListener() {
 
-@Override
- 
-public void actionPerformed(ActionEvent event) {
-  
-    cnt += 1;
-    System.out.println("Counter = "+cnt);
-    refreshNetwork();
-    getWLANbssidInfo();
-    //***************
-    if (netIsAvailable()) {
-        trayIcon.setToolTip("Connected to internet.");
-    } else {
-           trayIcon.setToolTip("Not Connected to internet.");
-    }
-    //*****************Restart timer for low memory uses.
-    if (cnt==3) {
-         cnt=0;
-        timer.restart();
-       
-    }
-}
+        //Refresh Internet Connectivity  Check
+        ActionListener actListner = new ActionListener() {
 
- 
-  };
- 
-   timer = new Timer(7000, actListner);//Every 7 second refresh networks
- 
-  timer.start();
-               //**********************************
-        
-        
-        
+            @Override
+
+            public void actionPerformed(ActionEvent event) {
+
+                cnt += 1;
+                System.out.println("Counter = " + cnt);
+                refreshNetwork();
+                getWLANbssidInfo();
+                //openProperties.fill();
+                //***************
+                if (netIsAvailable()) {
+                    trayIcon.setToolTip("Connected to internet.");
+                } else {
+                    trayIcon.setToolTip("Not Connected to internet.");
+                }
+                //*****************Restart timer for low memory uses.
+                if (cnt == 3) {
+                    cnt = 0;
+                    timer.restart();
+
+                }
+            }
+
+        };
+
+        timer = new Timer(7000, actListner);//Every 7 second refresh networks
+
+        timer.start();
+        //**********************************
+        Scan();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
