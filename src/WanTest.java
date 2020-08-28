@@ -2,11 +2,13 @@
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.geom.RoundRectangle2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.sun.awt.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,11 +29,27 @@ public class WanTest extends javax.swing.JFrame {
     public WanTest() {
         initComponents();
         this.setTitle("WAN Test");
-        this.setSize(440, 330);
+        this.setSize(440, 355);
+        jPanel1.setSize(440, 200);
         getWLANbssidInfo();
+        AWTUtilities.setWindowShape(this, new RoundRectangle2D.Float(0, 0, 440, 355, 50, 50));
+        AWTUtilities.setWindowOpacity(this, 0.7f);
         setLocationOfProperties();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icon.jpg")));
+        //fill() ;
+    }
 
+    // function to increase progress
+    public static void fillProgress() {
+
+        try {
+            for (int j = 0; j < 100; j++) {
+                progress.setValue(j);
+                //progress.setString(j + "");
+                Thread.sleep(200);
+            }
+        } catch (InterruptedException e) {
+        }
     }
 
     public void setLocationOfProperties() {
@@ -92,11 +110,15 @@ public class WanTest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        progress = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         wlanResults = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().add(progress, java.awt.BorderLayout.PAGE_END);
 
         wlanResults.setEditable(false);
         wlanResults.setBackground(new java.awt.Color(102, 0, 102));
@@ -109,6 +131,15 @@ public class WanTest extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
+        jPanel1.setBackground(new java.awt.Color(204, 51, 0));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Wifi Properties");
+        jPanel1.add(jLabel1);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
         setSize(new java.awt.Dimension(215, 293));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -117,6 +148,9 @@ public class WanTest extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
+        //fillProgress() ;
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -149,7 +183,10 @@ public class WanTest extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private static javax.swing.JProgressBar progress;
     public static javax.swing.JTextArea wlanResults;
     // End of variables declaration//GEN-END:variables
 }
