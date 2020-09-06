@@ -40,18 +40,6 @@ public class WanTest extends javax.swing.JFrame {
     }
 
     // function to increase progress
-    public static void fillProgress() {
-
-        try {
-            for (int j = 0; j < 100; j++) {
-                progress.setValue(j);
-                //progress.setString(j + "");
-                Thread.sleep(200);
-            }
-        } catch (InterruptedException e) {
-        }
-    }
-
     public void setLocationOfProperties() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         //height of the task bar
@@ -110,7 +98,6 @@ public class WanTest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        progress = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         wlanResults = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
@@ -118,20 +105,19 @@ public class WanTest extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        getContentPane().add(progress, java.awt.BorderLayout.PAGE_END);
 
         wlanResults.setEditable(false);
-        wlanResults.setBackground(new java.awt.Color(102, 0, 102));
+        wlanResults.setBackground(new java.awt.Color(0, 0, 0));
         wlanResults.setColumns(20);
         wlanResults.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        wlanResults.setForeground(new java.awt.Color(255, 255, 255));
+        wlanResults.setForeground(new java.awt.Color(204, 204, 204));
         wlanResults.setRows(5);
         wlanResults.setMargin(new java.awt.Insets(5, 10, 1, 1));
         jScrollPane1.setViewportView(wlanResults);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 0, 0));
         jPanel1.setForeground(new java.awt.Color(204, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -187,7 +173,6 @@ public class WanTest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private static javax.swing.JProgressBar progress;
     public static javax.swing.JTextArea wlanResults;
     // End of variables declaration//GEN-END:variables
 }

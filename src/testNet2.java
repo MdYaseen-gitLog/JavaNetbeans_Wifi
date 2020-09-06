@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
+import wifiupdater.Updates;
 
 /**
  *
@@ -36,6 +37,7 @@ public class testNet2 extends javax.swing.JFrame {
     static Setting st = new Setting();
     static WanTest openProperties = new WanTest();
     static testNet2 openDashboard = new testNet2();
+    static Updates openUpdater = new Updates();
     static boolean frameVisible;
     private static int cnt;
     static PopupMenu popup = new PopupMenu();
@@ -45,6 +47,7 @@ public class testNet2 extends javax.swing.JFrame {
     static MenuItem ShowUtility = new MenuItem("Show Utility");
     static MenuItem exitItem = new MenuItem("Exit");
     static MenuItem setting = new MenuItem("Open Setting");
+    static MenuItem updateWifi = new MenuItem("Updater...");
     static TrayIcon trayIcon;
     static int clkCount = 0;
 
@@ -314,7 +317,7 @@ public class testNet2 extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
 
         listNetwork.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -417,8 +420,11 @@ public class testNet2 extends javax.swing.JFrame {
             popup.addSeparator();
             popup.add(ShowUtility);
             popup.add(HideUtility);
+            popup.add(HideUtility);
             popup.addSeparator();
             //popup.add(setting);
+
+            /// popup.add();
             popup.addSeparator();
             popup.add(exitItem);
             ShowUtility.setEnabled(false);
