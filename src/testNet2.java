@@ -1,6 +1,7 @@
 
 import com.sun.awt.*;
 import java.awt.AWTException;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Insets;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -47,7 +49,7 @@ public class testNet2 extends javax.swing.JFrame {
     static MenuItem ShowUtility = new MenuItem("Show Utility");
     static MenuItem exitItem = new MenuItem("Exit");
     static MenuItem setting = new MenuItem("Open Setting");
-    static MenuItem updateWifi = new MenuItem("Updater...");
+    static MenuItem updateWifi = new MenuItem("Run Updater...");
     static TrayIcon trayIcon;
     static int clkCount = 0;
 
@@ -297,6 +299,16 @@ public class testNet2 extends javax.swing.JFrame {
         }
     }
 
+    static void LaunchUpdater(String fileLaunch) {
+
+        File file = new File(fileLaunch);
+        try {
+            Desktop.getDesktop().open(file);
+        } catch (IOException ex) {
+            System.err.println("Error : " + ex.getMessage());
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -423,7 +435,7 @@ public class testNet2 extends javax.swing.JFrame {
             popup.add(HideUtility);
             popup.addSeparator();
             //popup.add(setting);
-
+            popup.add(updateWifi);
             /// popup.add();
             popup.addSeparator();
             popup.add(exitItem);
@@ -509,6 +521,14 @@ public class testNet2 extends javax.swing.JFrame {
             HideUtility.setEnabled(false);
         });
         //***********End of hide menu Click
+        //***********updateWifi menu click
+        // addActionListener
+        updateWifi.addActionListener((ActionEvent e) -> {
+            System.out.println("Clicked on Updater....");
+            LaunchUpdater("C:\\Program Files\\Wifi\\WifiUpdater.exe");
+
+        });
+        //***********End of updateWifi menu Click
         //***********Exit menu click
         // addActionListener
         exitItem.addActionListener((ActionEvent e) -> {
