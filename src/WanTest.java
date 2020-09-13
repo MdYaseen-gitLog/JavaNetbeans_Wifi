@@ -107,17 +107,17 @@ public class WanTest extends javax.swing.JFrame {
         setUndecorated(true);
 
         wlanResults.setEditable(false);
-        wlanResults.setBackground(new java.awt.Color(0, 0, 0));
+        wlanResults.setBackground(new java.awt.Color(0, 204, 204));
         wlanResults.setColumns(20);
         wlanResults.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        wlanResults.setForeground(new java.awt.Color(204, 204, 204));
+        wlanResults.setForeground(new java.awt.Color(255, 51, 51));
         wlanResults.setRows(5);
         wlanResults.setMargin(new java.awt.Insets(5, 10, 1, 1));
         jScrollPane1.setViewportView(wlanResults);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jPanel1.setBackground(new java.awt.Color(255, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 255));
         jPanel1.setForeground(new java.awt.Color(204, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N

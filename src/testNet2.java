@@ -329,9 +329,10 @@ public class testNet2 extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        listNetwork.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        listNetwork.setToolTipText("Network Lists");
+        listNetwork.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 204), 2, true));
 
         btnScan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Refresh.jpg"))); // NOI18N
         btnScan.setToolTipText("Scan for Networks");
@@ -379,8 +380,8 @@ public class testNet2 extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(listNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(listNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnDisconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
