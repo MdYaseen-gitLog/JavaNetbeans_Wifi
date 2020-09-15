@@ -73,6 +73,7 @@ public class testNet2 extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icon.jpg")));
         //Transparent Form
         AWTUtilities.setWindowOpacity(this, 0.9f);
+        // getPassword();
 
     }
 
@@ -258,7 +259,7 @@ public class testNet2 extends javax.swing.JFrame {
 
     public static void getPassword() {
 
-        String cmd = "netsh wlan show profile name=" + listNetwork + " key=clear | findstr Key";
+        String cmd = "netsh wlan show profile name=" + "Gazi" + " key=clear | findstr Key";
 
         try {
 
@@ -610,6 +611,7 @@ public class testNet2 extends javax.swing.JFrame {
         timer.start();
         //**********************************
         Scan();
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
